@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import Navbar from '../components/navbar'
 import {SessionProvider} from 'next-auth/react'
 import Footer from '../components/footer'
+import Banner from "../components/banner"
 
 function MyApp({
   Component,
@@ -11,6 +12,7 @@ function MyApp({
   }: AppProps) {
   return <div>
     <SessionProvider session={session}>
+      <Banner/>
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-1">
