@@ -5,6 +5,8 @@ import Navbar from '../components/navbar'
 import {SessionProvider} from 'next-auth/react'
 import Footer from '../components/footer'
 import Banner from "../components/banner"
+import LogoBanner from '../components/logo_banner'
+
 
 function MyApp({
   Component,
@@ -15,6 +17,7 @@ function MyApp({
       <Banner message="Sale is on! 25% off sitewide using SUMMER25 at checkout!"/>
       <div className="flex flex-col min-h-screen">
         <Navbar />
+        <LogoBanner/>
         <div className="flex-1">
           <Component {...pageProps} />
 
