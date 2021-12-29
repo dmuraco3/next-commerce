@@ -1,6 +1,6 @@
 import { FaFacebookF, FaInstagram, FaPinterestP, FaTwitter } from "react-icons/fa";
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
     return (
         <footer className="border border-black box-border w-full">
             <div className="flex">
