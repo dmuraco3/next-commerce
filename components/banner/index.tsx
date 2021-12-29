@@ -1,7 +1,7 @@
-export const Banner:React.FC = () => {
+export const Banner:React.FC<{message: string}> = ({message}) => {
     return (<div>
         <div className="flex bg-black">
-            <span className="text-white w-full text-center py-1 text-2xl font-mono">Sale is on! 25% off sitewide using SUMMER25 at checkout</span>
+            <span className="text-white w-full text-center py-1 text-2xl font-mono">{message}</span>
         </div>
     </div>)
 }
