@@ -6,6 +6,7 @@ import Image from 'next/image'
 import {FaUser, FaUserCircle} from 'react-icons/fa'
 
 import { signIn, signOut, useSession } from 'next-auth/react'
+import CartIcon from '../cart/icon'
 const NavLink: React.FC<{to: string,}> = ({to, children}) => {
     const router = useRouter()
     let basePath = router.asPath.split('/')[1]
@@ -97,6 +98,12 @@ const Navbar: React.FC = ()  => {
                         }}>
                             <FaUserCircle size={30} className="text-gray-500 filter drop-shadow-lg bg-white rounded-full hover:cursor-pointer"/>
                         </button>
+
+                        <span className="ml-4">
+                            <CartIcon />
+
+                        </span>
+
                         <div className={`absolute top-10 right-0  w-40 h-60 bg-white filter drop-shadow-xl border border-gray-200 rounded-lg flex flex-col justify-end p-4 ${accountNavOpen ? "flex" : "hidden"}`}>
                             <button onClick={(e) => {
                                 e.preventDefault()
