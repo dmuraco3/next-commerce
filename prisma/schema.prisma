@@ -53,3 +53,46 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Tag {
+  id        Int        @id @unique @default(autoincrement())
+	name      String     @unique
+	products  Product[]
+}
+
+model Category {
+    id        Int        @id @unique @default(autoincrement())
+    name      String     @unique
+    products  Product[]
+}
+
+model Product {
+    id              Int          @id @unique @default(autoincrement())
+    name            String
+    sku             String
+    price           Int
+    createdAt       DateTime     @default(now())
+    updatedAt       DateTime     @default(now())
+    views           Int
+    images          String[]
+    tags            Tag[]
+    category        Category      @relation(fields: [categoryId], references: [id])
+    categoryId      Int
+    ProductVariants Product_Variant[]
+}
+
+enum VariantType {
+  Size
+  Color
+  Material
+  Style
+}
+
+model Product_Variant {
+  id          Int         @id @unique @default(autoincrement())
+  product     Product     @relation(fields: [product_id], references: [id])
+  product_id  Int 
+  type        VariantType
+  price       Int
+  quantity    Int
+}
