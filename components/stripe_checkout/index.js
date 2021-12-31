@@ -3,6 +3,11 @@ import { loadStripe } from '@stripe/stripe-js';
 import {useEffect} from "react"
 import { useAppSelector } from '../../stores/hooks';
 
+import axios from "axios"
+
+
+import {useRouter} from 'next/router'
+
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
@@ -23,10 +28,28 @@ export default function PreviewPage() {
       console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
     }
   }, []);
+  
+  const router = useRouter()
 
   return (
-    <form action="/api/checkout_sessions" method="POST">
+    // action="/api/checkout_sessions" method="POST"
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        axios.post("/api/checkout_sessions", {
+          items: [{
+            price: "price_1KCZvuJXbqMuWcYwIKesDoXE",
+            quantity: 1
+          }]
+        })
+        .then(res => res.data)
+        .then(res => {
+          window.location.href = res.url
+        })
+      }}
+    >
       <section>
+        <input name="bingBong" />
         <button type="submit" role="link">
           Checkout
         </button>
