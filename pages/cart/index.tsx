@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useAppDispatch, useAppSelector } from "../../stores/hooks";
 import Link from 'next/link'
 import { add, decrementQuantity, incrementQuantity } from "../../stores/cart";
-import StripeFunc from "../../components/stripe/StripeFunc"
+import StripeFunc from "../../components/stripe/PublishableKey"
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
