@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useAppDispatch, useAppSelector } from "../../stores/hooks";
 import Link from 'next/link'
 import { add, decrementQuantity, incrementQuantity } from "../../stores/cart";
+import Checkout from "../../components/stripe_checkout"
 
 const Cart: NextPage = () => {
 
@@ -70,6 +71,7 @@ const Cart: NextPage = () => {
                 <br />
                 <br />
             </button>
+            <Checkout/>
         </div>
     )
 }
