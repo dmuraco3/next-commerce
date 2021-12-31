@@ -37,8 +37,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ]
     }
 
-    const tags = ['t shirt', 't-shirt', 'black', 'medium']
-
     const product = await prisma.product.create({
         data: {
             name: productToAdd.name,
