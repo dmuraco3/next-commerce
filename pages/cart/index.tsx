@@ -2,42 +2,8 @@ import { NextPage } from "next";
 import { useAppDispatch, useAppSelector } from "../../stores/hooks";
 import Link from 'next/link'
 import { add, decrementQuantity, incrementQuantity } from "../../stores/cart";
-import StripeFunc from "../../components/stripe/PublishableKey"
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import { useEffect, useState } from "react";
-import CheckoutForm from "../../components/checkout_form"
-import { json } from "stream/consumers";
-import Stripe from "stripe"
-
-
-//const stripePromise = loadStripe("pk_test_51KCZ1WJXbqMuWcYwXBTzwRZUAFh8tS1aIsWddEPVFWglnetxh6SsftAeOA3ACA2ozBVsbME1crlSUSfIGK72RvLX00Ky8D7m2k");
 
 const Cart: NextPage = () => {
-
-{/*
-    const [clientSecret, setClientSecret] = useState('');
-
-    useEffect(() => {
-
-        fetch('/api/secret', {
-            method: "GET",
-            headers: { 'Content-Type': "application/json" }
-        })
-        .then((res) => res.json())
-        .then((data) => setClientSecret(data.clientSecret));
-
-    }, [])
-
-    StripeFunc()
-
-    const appearance = {
-        theme: "stripe"
-    }
-    const options = {
-        clientSecret,
-        appearance,
-    }*/}
 
     const cart = useAppSelector((state) => state.cart)
     const dispatch = useAppDispatch()
@@ -78,6 +44,9 @@ const Cart: NextPage = () => {
                         </div>
                     </div>
                 ))}
+                {cart.items.length > 0 && (
+                    <Link href="cart/checkout/">Checkout</Link>
+                )}
                 {cart.items.length === 0 && (
                     <h1 className="my-20">Your cart is empty <Link href="/discover">
                         <a className="text-blue-600 font-semibold">go shopping</a>
@@ -101,17 +70,6 @@ const Cart: NextPage = () => {
                 <br />
                 <br />
             </button>
-            {/*
-            {clientSecret && (
-                <Elements stripe={stripePromise} options={options}>
-                    <CheckoutForm />
-            </Elements>)}*/}
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
         </div>
     )
 }

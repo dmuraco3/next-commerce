@@ -1,10 +1,10 @@
 import Stripe from "stripe"
 import { useAppDispatch, useAppSelector } from "../../stores/hooks";
-
+import { useRouter } from "next/router";
 
 export const CreatePaymentIntent = async (req, res) => {
+
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-    
     
     const paymentIntent = await stripe.paymentIntents.create({
         amount: 50200,
