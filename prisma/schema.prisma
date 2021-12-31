@@ -69,14 +69,13 @@ model Category {
 model Product {
     id              Int          @id @unique @default(autoincrement())
     name            String
-    sku             String
     price           Int
     createdAt       DateTime     @default(now())
     updatedAt       DateTime     @default(now())
-    views           Int
+    views           Int          @default(0)
     images          String[]
     tags            Tag[]
-    category        Category      @relation(fields: [categoryId], references: [id])
+    category        Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
     categoryId      Int
     ProductVariants Product_Variant[]
 }
@@ -90,9 +89,12 @@ enum VariantType {
 
 model Product_Variant {
   id          Int         @id @unique @default(autoincrement())
-  product     Product     @relation(fields: [product_id], references: [id])
-  product_id  Int 
-  type        VariantType
+  name        String      
+  product     Product     @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  product_id  Int         
+  sku         String      @unique
+
+  type        VariantType 
   price       Int
-  quantity    Int
+
 }
