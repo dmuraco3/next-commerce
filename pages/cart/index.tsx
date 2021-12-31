@@ -11,11 +11,11 @@ import { json } from "stream/consumers";
 import Stripe from "stripe"
 
 
-const stripePromise = loadStripe("pk_test_51KCZ1WJXbqMuWcYwXBTzwRZUAFh8tS1aIsWddEPVFWglnetxh6SsftAeOA3ACA2ozBVsbME1crlSUSfIGK72RvLX00Ky8D7m2k");
+//const stripePromise = loadStripe("pk_test_51KCZ1WJXbqMuWcYwXBTzwRZUAFh8tS1aIsWddEPVFWglnetxh6SsftAeOA3ACA2ozBVsbME1crlSUSfIGK72RvLX00Ky8D7m2k");
 
 const Cart: NextPage = () => {
 
-
+{/*
     const [clientSecret, setClientSecret] = useState('');
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const Cart: NextPage = () => {
     const options = {
         clientSecret,
         appearance,
-    }
+    }*/}
 
     const cart = useAppSelector((state) => state.cart)
     const dispatch = useAppDispatch()
@@ -101,10 +101,11 @@ const Cart: NextPage = () => {
                 <br />
                 <br />
             </button>
+            {/*
             {clientSecret && (
                 <Elements stripe={stripePromise} options={options}>
                     <CheckoutForm />
-                </Elements>)}
+            </Elements>)}*/}
             <br />
             <br />
             <br />

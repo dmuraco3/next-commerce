@@ -7,7 +7,7 @@ export const CreatePaymentIntent = async (req, res) => {
     
     
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: 1000,
+        amount: 50200,
         currency: 'usd',
         automatic_payment_methods: { enabled: true },
         
