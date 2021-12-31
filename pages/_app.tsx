@@ -24,7 +24,6 @@ function MyApp({
           
           <Banner message="Sale is on! 25% off sitewide using SUMMER25 at checkout!"/>
           <Navbar />
-          <LogoBanner/>
           
           <div className="flex-1">
             <Component {...pageProps} />
