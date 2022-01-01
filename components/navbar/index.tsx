@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import {FaUser, FaUserCircle} from 'react-icons/fa'
+import {FaShoppingCart, FaUser, FaUserCircle} from 'react-icons/fa'
 
 import { signIn, signOut, useSession } from 'next-auth/react'
 import CartIcon from '../cart/icon'
@@ -59,6 +59,14 @@ const Navbar: React.FC = ()  => {
 
     const {data:session} = useSession()
 
+    const [totalItems, setTotalItems] = useState(0)
+
+    useEffect(() => {
+        if((window as any).Snipcart) {
+            setTotalItems((window as any).Snipcart.store.getState().cart.items.count)
+        }
+    })
+
     return (
         <nav className="flex filter drop-shadow-md bg-white px-4 py-4 h-20 items-center font-mono">
             <MobileNav open={open} setOpen={setOpen}/>
@@ -100,7 +108,16 @@ const Navbar: React.FC = ()  => {
                         </button>
 
                         <span className="ml-4">
-                            <CartIcon />
+                        <a
+                            className="snipcart-checkout snipcart-summary relative"
+                            href="#"
+                            style={{ textDecoration: "none" }}
+                        >
+                            <FaShoppingCart size={24} />
+                            <span className="absolute -bottom-2 left-2 h-8 w-8 bg-primary rounded-full flex items-center justify-center font-bold">
+                                {totalItems < 99 ? totalItems : "99+"}
+                            </span>
+                        </a>
 
                         </span>
 

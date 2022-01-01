@@ -40,7 +40,7 @@ function MyApp({
             <Footer />
           </div>
           <script async src="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.js" />
-          <div hidden id="snipcart" data-api-key="OGQ2OTZmOTMtNzIyZC00MGZkLWExY2MtMTYzYjVkZDdmZmM4NjM3NzY1NzQ4NjUyODUxMzQ5" />
+          <div hidden id="snipcart" data-api-key="OGQ2OTZmOTMtNzIyZC00MGZkLWExY2MtMTYzYjVkZDdmZmM4NjM3NzY1NzQ4NjUyODUxMzQ5" data-config-add-product-behavior="none" />
 
         </div>
 
