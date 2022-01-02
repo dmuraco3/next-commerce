@@ -1,5 +1,6 @@
 import { Product } from '@prisma/client'
 import type { NextPage } from 'next'
+import React from 'react'
 import { useEffect, useState } from 'react'
 import ProductLayout from '../components/ProductLayout'
 
@@ -18,7 +19,7 @@ const Home: NextPage = () => {
 
     return (
         <div>
-            <ProductLayout products={products}/>
+            <ProductLayout products={products} loadMore={false} loadMoreAction={() => {}}/>
         </div>
     )  
 }
