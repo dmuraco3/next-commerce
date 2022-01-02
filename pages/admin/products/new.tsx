@@ -4,6 +4,11 @@ import Navbar from "../../../components/admin/navbar";
 import { AuthedPage } from "../../../types/authed-page";
 import { useState } from "react";
 
+import TextField from '@mui/material/TextField'
+import Grid from '@mui/material/Grid'
+import Checkbox from "@mui/material/Checkbox";
+import Button from '@mui/material/Button'
+
 const NewProduct: AuthedPage = () => {
 
     const [formData, setFormData] = useState<{
@@ -12,50 +17,115 @@ const NewProduct: AuthedPage = () => {
         quantity: string,
         tags: [],
         category: string,
-        Options: [{name: 'Size' | 'Material', values: string[]}?, {name: 'Size' | 'Material', values: string[]}?]
+        Options: {
+            size: {values: string[], selected: boolean}
+        }
     }>({
         title:    "",
         price:    "",
         quantity: "",
         tags:     [],
         category: "string",
-        Options: [
-            {
-                name: 'Size',
+        Options: {
+            size: {
+                selected: false,
                 values: []
             }
-        ]
+        }
 
     })
 
-    const options = [{value: "Size", label: "Size"}]
+    const [optionsChecked, setOptionsChecked] = useState<boolean>(false)
+    const [productOptions, setProductOptions] = useState<{size: {done: boolean, values: string[]}}>({
+        size: {
+            done: false,
+            values: []
+        }
+    })
+
+    const options = [{value: "Size", label: "Size"}, {value: "Color", label: "Color"}]
 
     return (
         <div className="min-h-screen flex">
             <Navbar activeTab="/products/new"/>
             <div className="w-9/12 flex items-center flex-col">
                 <h1 className="text-xl font-semibold ">New Product</h1>
-                <form className="bg-white filter drop-shadow-lg w-9/12 h-72 rounded-md">
-                        <label htmlFor="name">Name</label>
-                        <input name="name" className="border rounded-lg"></input>
-                        <br/>
-                        <label htmlFor="tags">tags</label>
-                        <Creatable name="tags" isMulti className="w-9/12"/>
-
-                        <h1 className="text-lg font-semibold mt-10">Options</h1>
-
-                        <Select options={options} defaultValue={options[0]}/>
-                        <input placeholder="medium" onChange={() => {setFormData({
-                            ...formData,
-                            Options: [
+                <form className="bg-white filter drop-shadow-lg w-9/12 rounded-md px-[10%] py-4">
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField id="outlined-basic" label="Title" value={formData.title} variant="outlined" required sx={
                                 {
-                                    name: 'Size',
-                                    values: []
-                                },
-                                
-                            ]
-                        })}}/>
+                                    width: 'calc(50% - 8px)'
+                                }
+                            }/>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField id="outlined-basic" label="Quantity" value={formData.quantity} variant="outlined" required fullWidth />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField id="outlined-basic" label="Price" value={formData.price} variant="outlined" required fullWidth/>
+                        </Grid>
 
+                        <Grid item xs={12}>
+                            <h1>Tags</h1>
+                            <Creatable name="tags" isMulti className="" placeholder="Start typing..."/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <h1>Category</h1>
+                            <Creatable placeholder="Start typing..."/>
+                        </Grid>
+                        <Grid item xs={12} className="my-4">
+                            <hr />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <h1>This product features options</h1>
+                            <Checkbox value={optionsChecked} onChange={(e) => {
+                                setOptionsChecked(e.target.checked)
+                            }}/>
+
+                            {optionsChecked && <div>
+                                <hr className="my-2" />
+                                <span>Option name</span>
+                                <Select options={options} defaultValue={options[0]} onChange={(e) => {
+                                    if(e?.value === 'Size') {
+                                        setFormData({
+                                            ...formData,
+                                            Options: {
+                                                ...formData.Options,
+                                                size: {
+                                                    ...formData.Options.size,
+                                                    selected: true,
+
+                                                }
+                                            }
+                                        })
+                                    }
+                                }}/>
+
+                                <br/>
+
+                                <span>Option value</span>
+
+                                <Creatable isMulti onChange={(e) => {
+                                    setFormData({
+                                        ...formData,
+                                        Options: {
+                                            ...formData.Options,
+                                            size: {
+                                                ...formData.Options.size,
+                                                values: e.map((value) => {return (value as any).value}) as string[]
+                                            }
+                                        }
+                                    })
+                                }}/>
+                                
+                                <br />
+                            </div>}
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button variant="contained" className="bg-indigo-500">Submit</Button>
+                        </Grid>
+                    </Grid>
                 </form>
             </div>
         </div>
