@@ -30,13 +30,19 @@ const Auth: React.FC = ({children}) => {
   else return <>Loading...</>
 }
 
+import Head from 'next/head'
+
 function MyApp({
   Component,
   pageProps: {session, ...pageProps} 
   }: AuthedPageProps) {
   return <div>
     <SessionProvider session={session}>
-        
+      <Head>
+        <link rel="preconnect" href="https://app.snipcart.com" />
+        <link rel="preconnect" href="https://cdn.snipcart.com" />
+        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.css" />
+      </Head>
 
       <Provider store={store}>
 
@@ -56,9 +62,10 @@ function MyApp({
 
           
           <div className="flex-1 flex items-end">
-
             <Footer />
           </div>
+          <script async src="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.js" />
+          <div hidden id="snipcart" data-api-key="OGQ2OTZmOTMtNzIyZC00MGZkLWExY2MtMTYzYjVkZDdmZmM4NjM3NzY1NzQ4NjUyODUxMzQ5" data-config-add-product-behavior="none" />
 
         </div>
 
