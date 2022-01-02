@@ -8,14 +8,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/material": "^5.2.6",
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^3.7.0",
     "@reduxjs/toolkit": "^1.7.1",
-    "@stripe/react-stripe-js": "^1.7.0",
-    "@stripe/stripe-js": "^1.22.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@types/react-redux": "^7.1.21",
-    "@types/stripe": "^8.0.417",
     "micro": "^9.3.4",
     "next": "12.0.7",
     "next-auth": "^4.0.6",
@@ -23,12 +21,7 @@
     "react": "^17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
-    "react-redux": "^7.2.6",
-<<<<<<< HEAD
-    "react-select": "^5.2.1"
-=======
-    "stripe": "^8.195.0"
->>>>>>> origin/main
+    "react-redux": "^7.2.6"
   },
   "devDependencies": {
     "@types/node": "17.0.5",
