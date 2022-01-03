@@ -56,3 +56,51 @@ export const getProductById = async (id: number) => {
     })
     return product
 }
+
+
+/**
+ * This function creates a new product
+ * @param name - name of product
+ * @param quantity - quantity of product available
+ * @param price - price of product
+ * @param category - category of product
+ * @param images - list of links to images
+ * @param options - Product_Variant in database
+ * @param tags - strings that product is searchable by
+ **/
+export const createProduct = async (name: string, quantity: number, price: number, category: string, images: string[],options?: {size: {values: string[]}}, tags?: string[]) => {
+    const post = await prisma.product.create({
+        data: {
+            name,
+            price,
+            category: {
+                connectOrCreate: {
+                    where: {
+                        name: category
+                    },
+                    create:{
+                        name: category
+                    }
+                }
+            },
+            ...(options && {
+                ProductVariants: {
+                    createMany: {
+                        data: options.size.values.map(value => {
+                            return {
+                                name: value,
+                                type: 'Size',
+                                sku: name + category + value,
+                                price: price,
+
+                            }
+                        })
+                    }
+                }
+            })
+
+
+
+        }
+    })
+}

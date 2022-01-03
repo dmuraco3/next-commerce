@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 
     return (
         <div>
-            <ProductLayout products={products}/>
+            <ProductLayout products={products} loadMore={false} loadMoreAction={() => {}}/>
         </div>
     )  
 }

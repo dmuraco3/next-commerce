@@ -4,6 +4,8 @@ import Navbar from "../../../components/admin/navbar";
 import { AuthedPage } from "../../../types/authed-page";
 import { useState } from "react";
 
+import axios from 'axios'
+
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import Checkbox from "@mui/material/Checkbox";
@@ -13,20 +15,20 @@ const NewProduct: AuthedPage = () => {
 
     const [formData, setFormData] = useState<{
         title: string,
-        price: string,
-        quantity: string,
-        tags: [],
+        price: number,
+        quantity: number,
+        tags: string[],
         category: string,
-        Options: {
+        options: {
             size: {values: string[], selected: boolean}
         }
     }>({
         title:    "",
-        price:    "",
-        quantity: "",
+        price:    0,
+        quantity: 0,
         tags:     [],
-        category: "string",
-        Options: {
+        category: "",
+        options: {
             size: {
                 selected: false,
                 values: []
@@ -44,6 +46,11 @@ const NewProduct: AuthedPage = () => {
     })
 
     const options = [{value: "Size", label: "Size"}, {value: "Color", label: "Color"}]
+
+    const onSubmit = (formData: {title: string, quantity: number, price: number, tags: string[], category: string, options: {size: {values: string[]}}}) => {
+        axios.post(`/api/products/new`, formData)
+        .then(res => console.log(res))
+    }       
 
     return (
         <div className="min-h-screen flex">
@@ -90,10 +97,10 @@ const NewProduct: AuthedPage = () => {
                                     if(e?.value === 'Size') {
                                         setFormData({
                                             ...formData,
-                                            Options: {
-                                                ...formData.Options,
+                                            options: {
+                                                ...formData.options,
                                                 size: {
-                                                    ...formData.Options.size,
+                                                    ...formData.options.size,
                                                     selected: true,
 
                                                 }
@@ -109,10 +116,10 @@ const NewProduct: AuthedPage = () => {
                                 <Creatable isMulti onChange={(e) => {
                                     setFormData({
                                         ...formData,
-                                        Options: {
-                                            ...formData.Options,
+                                        options: {
+                                            ...formData.options,
                                             size: {
-                                                ...formData.Options.size,
+                                                ...formData.options.size,
                                                 values: e.map((value) => {return (value as any).value}) as string[]
                                             }
                                         }
@@ -123,7 +130,11 @@ const NewProduct: AuthedPage = () => {
                             </div>}
                         </Grid>
                         <Grid item xs={12}>
-                            <Button variant="contained" className="bg-indigo-500">Submit</Button>
+                            <Button variant="contained" className="bg-indigo-500" onClick={(e) => {
+                                onSubmit({
+                                    ...formData
+                                })
+                            }}>Submit</Button>
                         </Grid>
                     </Grid>
                 </form>
