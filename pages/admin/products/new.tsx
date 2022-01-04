@@ -14,7 +14,7 @@ import Button from '@mui/material/Button'
 const NewProduct: AuthedPage = () => {
 
     const [formData, setFormData] = useState<{
-        title: string,
+        name: string,
         price: number,
         quantity: number,
         tags: string[],
@@ -23,7 +23,7 @@ const NewProduct: AuthedPage = () => {
             size: {values: string[], selected: boolean}
         }
     }>({
-        title:    "",
+        name:    "",
         price:    0,
         quantity: 0,
         tags:     [],
@@ -47,7 +47,8 @@ const NewProduct: AuthedPage = () => {
 
     const options = [{value: "Size", label: "Size"}, {value: "Color", label: "Color"}]
 
-    const onSubmit = (formData: {title: string, quantity: number, price: number, tags: string[], category: string, options: {size: {values: string[]}}}) => {
+    const onSubmit = (formData: {name: string, quantity: number, price: number, tags: string[], category: string, options: {size: {values: string[]}}}) => {
+        console.log(formData)
         axios.post(`/api/products/new`, formData)
         .then(res => console.log(res))
     }       
@@ -60,17 +61,17 @@ const NewProduct: AuthedPage = () => {
                 <form className="bg-white filter drop-shadow-lg w-9/12 rounded-md px-[10%] py-4">
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <TextField id="outlined-basic" label="Title" value={formData.title} variant="outlined" required sx={
+                            <TextField id="outlined-basic" label="Name" value={formData.name} onChange={(e) => {setFormData({...formData, name: e.target.value})}} variant="outlined" required sx={
                                 {
                                     width: 'calc(50% - 8px)'
                                 }
                             }/>
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField id="outlined-basic" label="Quantity" value={formData.quantity} variant="outlined" required fullWidth />
+                            <TextField id="outlined-basic" label="Quantity" type="number" value={formData.quantity} onChange={(e) => {setFormData({...formData, quantity: Number(e.target.value)})}}variant="outlined" required fullWidth />
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField id="outlined-basic" label="Price" value={formData.price} variant="outlined" required fullWidth/>
+                            <TextField id="outlined-basic" label="Price" type="number" value={formData.price} onChange={(e) => {setFormData({...formData, price: Number(e.target.value)})}}variant="outlined" required fullWidth/>
                         </Grid>
 
                         <Grid item xs={12}>

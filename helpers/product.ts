@@ -69,7 +69,7 @@ export const getProductById = async (id: number) => {
  * @param tags - strings that product is searchable by
  **/
 export const createProduct = async (name: string, quantity: number, price: number, category: string, images: string[],options?: {size: {values: string[]}}, tags?: string[]) => {
-    const post = await prisma.product.create({
+    const product = await prisma.product.create({
         data: {
             name,
             price,
@@ -103,4 +103,5 @@ export const createProduct = async (name: string, quantity: number, price: numbe
 
         }
     })
+    return product
 }
